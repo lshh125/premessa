@@ -19,9 +19,7 @@ plot_barcode_separation <- function(bc.res, sep.threshold = NULL) {
         p <- p + ggplot2::geom_vline(xintercept = sep.threshold, colour = "red", linetype = 2)
     
     # Save plots
-    op <- options(digits.secs = 6)
-    t <- Sys.time()
-    options(op)
+    t <- format(Sys.time(), "%y-%m-%d %H-%M-%OS6")
     
     saveRDS(p, paste0('barcode_separation ', t, '.RDS'))
     
@@ -63,9 +61,7 @@ plot_barcode_channels_intensities <- function(m, bc.channels, m.normed = NULL) {
     )
     
     # Save plots
-    op <- options(digits.secs = 6)
-    t <- Sys.time()
-    options(op)
+    t <- format(Sys.time(), "%y-%m-%d %H-%M-%OS6")
     
     saveRDS(p, paste0('barcode_channels_intensities ', t, '.RDS'))
     
@@ -92,9 +88,7 @@ plot_separation_histogram <- function(bc.results) {
     )
     
     # Save plots
-    op <- options(digits.secs = 6)
-    t <- Sys.time()
-    options(op)
+    t <- format(Sys.time(), "%y-%m-%d %H-%M-%OS6")
     
     saveRDS(p, paste0('separation_histogram ', t, '.RDS'))
     
@@ -128,9 +122,7 @@ plot_barcode_yields <- function(bc.results, sep.threshold, mahal.threshold = NUL
     )
 
     # Save plots
-    op <- options(digits.secs = 6)
-    t <- Sys.time()
-    options(op)
+    t <- format(Sys.time(), "%y-%m-%d %H-%M-%OS6")
     
     saveRDS(p, paste0('barcode_yields ', t, '.RDS'))
     
@@ -203,11 +195,9 @@ plot_all_barcode_biaxials <- function(m, bc.channels) {
     ret <- do.call(fun, plotlist)
     
     # Save plots
-    op <- options(digits.secs = 6)
-    t <- Sys.time()
-    options(op)
+    t <- format(Sys.time(), "%y-%m-%d %H-%M-%OS6")
     
-    saveRDS(ret, paste0('barcode_yields ', t, '.RDS'))
+    saveRDS(ret, paste0('all_barcode_biaxials ', t, '.RDS'))
     
     #pdf(paste0('barcode_yields ', t, '.pdf'))
     #print(p)
