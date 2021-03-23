@@ -1,3 +1,8 @@
+# Purpose
+
+Save figures in an editable format for publication.
+
+
 # premessa
 
 `premessa` is an R package for pre-processing of flow and mass cytometry data, that includes panel editing/renaming for FCS files, bead-based normalization and debarcoding.
@@ -39,7 +44,7 @@ Start an R session and type the following commands
 
 ```
 library(devtools)
-install_github("ParkerICI/premessa")
+install_github("lshh125/premessa")
 ```
 
 This will install the premessa R package together with all the required dependencies.
