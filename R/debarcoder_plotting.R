@@ -17,7 +17,18 @@ plot_barcode_separation <- function(bc.res, sep.threshold = NULL) {
 
     if(!is.null(sep.threshold))
         p <- p + ggplot2::geom_vline(xintercept = sep.threshold, colour = "red", linetype = 2)
-
+    
+    # Save plots
+    op <- options(digits.secs = 6)
+    t <- Sys.time()
+    options(op)
+    
+    saveRDS(p, paste0('barcode_separation ', t, '.RDS'))
+    
+    pdf(paste0('barcode_separation ', t, '.pdf'))
+    print(p)
+    dev.off()
+    
     return(p)
 }
 
@@ -50,6 +61,18 @@ plot_barcode_channels_intensities <- function(m, bc.channels, m.normed = NULL) {
         + ggplot2::geom_point()
         + ggplot2::facet_wrap(~data.type, scales = "free")
     )
+    
+    # Save plots
+    op <- options(digits.secs = 6)
+    t <- Sys.time()
+    options(op)
+    
+    saveRDS(p, paste0('barcode_channels_intensities ', t, '.RDS'))
+    
+    pdf(paste0('barcode_channels_intensities ', t, '.pdf'))
+    print(p)
+    dev.off()
+    
     return(p)
 }
 
@@ -67,6 +90,18 @@ plot_separation_histogram <- function(bc.results) {
         + ggplot2::geom_histogram(bins = 100)
         + ggplot2::scale_x_continuous(breaks = seq(0, 1, 0.1))
     )
+    
+    # Save plots
+    op <- options(digits.secs = 6)
+    t <- Sys.time()
+    options(op)
+    
+    saveRDS(p, paste0('separation_histogram ', t, '.RDS'))
+    
+    pdf(paste0('separation_histogram ', t, '.pdf'))
+    print(p)
+    dev.off()
+    
     return(p)
 
 }
@@ -92,6 +127,17 @@ plot_barcode_yields <- function(bc.results, sep.threshold, mahal.threshold = NUL
         + ggplot2::labs(title = title.string)
     )
 
+    # Save plots
+    op <- options(digits.secs = 6)
+    t <- Sys.time()
+    options(op)
+    
+    saveRDS(p, paste0('barcode_yields ', t, '.RDS'))
+    
+    pdf(paste0('barcode_yields ', t, '.pdf'))
+    print(p)
+    dev.off()
+    
     return(p)
 }
 
@@ -153,5 +199,19 @@ plot_all_barcode_biaxials <- function(m, bc.channels) {
 
     plotlist <- c(plotlist, list(nrow = length(bc.channels)))
     fun <- get("grid.arrange", asNamespace("gridExtra"))
-    return(do.call(fun, plotlist))
+    
+    ret <- do.call(fun, plotlist)
+    
+    # Save plots
+    op <- options(digits.secs = 6)
+    t <- Sys.time()
+    options(op)
+    
+    saveRDS(ret, paste0('barcode_yields ', t, '.RDS'))
+    
+    #pdf(paste0('barcode_yields ', t, '.pdf'))
+    #print(p)
+    #dev.off()
+    
+    return()
 }
