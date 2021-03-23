@@ -9,7 +9,7 @@
 plot_barcode_separation <- function(bc.res, sep.threshold = NULL) {
     tab <- get_well_abundances(bc.res, seq(0, 1, 0.05))
     tab <- tab[tab$label != "Unassigned", ]
-    tab$label <- as.numeric(tab$label)
+    tab$label <- factor(tab$label, levels=sort(as.numeric(unique(tab$label))))
     (p <- ggplot2::ggplot(ggplot2::aes(y = Freq, x = threshold, colour = label, group = label), data = tab)
         + ggplot2::geom_line()
         + ggplot2::scale_x_continuous(breaks = seq(0, 1, 0.1))
@@ -113,7 +113,7 @@ plot_barcode_yields <- function(bc.results, sep.threshold, mahal.threshold = NUL
     perc.assigned <- 1 - (tab[tab$label == "Unassigned", "Freq"] / sum(tab$Freq))
     title.string <- sprintf("Barcode yields with current filters: %1.0f%% assigned", perc.assigned * 100)
     tab <- tab[tab$label != "Unassigned", ]
-    tab$label <- as.numeric(tab$label)
+    tab$label <- factor(tab$label, levels=sort(as.numeric(unique(tab$label))))
     (p <- ggplot2::ggplot(ggplot2::aes(x = label, y = Freq), data = tab)
         + ggplot2::geom_bar(stat = "identity")
         + ggplot2::scale_y_continuous("Cell count")
